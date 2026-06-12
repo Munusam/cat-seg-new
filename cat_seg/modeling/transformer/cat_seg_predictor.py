@@ -207,7 +207,6 @@ class CATSegPredictor(nn.Module):
         elif self.tokens is not None and prompt is None:
             tokens = self.tokens
 
-        print("TOKENS SHAPE:", tokens.shape)
         class_embeddings = clip_model.encode_text(tokens, prompt)
         class_embeddings = class_embeddings / class_embeddings.norm(dim=-1, keepdim=True)
         
