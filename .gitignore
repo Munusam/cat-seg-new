@@ -1,0 +1,26 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+
+# Virtual environments
+.venv/
+venv/
+
+# VS Code
+.vscode/
+
+# Kaggle outputs
+output/
+outputs/
+wandb/
+
+# Dataset
+datasets/brain_tumor/
+
+# Model weights
+*.pth
+*.pt
+
+# Logs
+*.log
