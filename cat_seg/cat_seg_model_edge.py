@@ -56,9 +56,8 @@ class EdgeCATSeg(nn.Module):
         )
 
         self.edge_proj = nn.Conv2d(
-            128,
-            512,
-            self.proj_dim,
+            in_channels=128,
+            out_channels=512,
             kernel_size=1
         )
 
