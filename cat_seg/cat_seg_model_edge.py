@@ -15,6 +15,8 @@ from detectron2.utils.memory import _ignore_torch_cuda_oom
 
 from einops import rearrange
 
+from detectron2.modeling import META_ARCH_REGISTRY
+
 from cat_seg.modeling.edge_branch import EdgeBranch
 import torch.nn.functional as F
 
@@ -222,8 +224,7 @@ class EdgeCATSeg(nn.Module):
         features = {
             'res5': res5,
             'res4': res4,
-            'res3': res3,
-            'edge': edge_features,
+            'res3': res3 + edge_features,
         }
 
         outputs = self.sem_seg_head(clip_features, features)
