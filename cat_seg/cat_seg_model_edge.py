@@ -48,11 +48,19 @@ class EdgeCATSeg(nn.Module):
         self.backbone = backbone
         self.sem_seg_head = sem_seg_head
         self.edge_branch = EdgeBranch()
+
+        self.proj_dim = (
+            768
+            if clip_pretrained == "ViT-B/16"
+            else 1024
+        )
+
         self.edge_proj = nn.Conv2d(
             128,
             self.proj_dim,
             kernel_size=1
         )
+        
         if size_divisibility < 0:
             size_divisibility = self.backbone.size_divisibility
         self.size_divisibility = size_divisibility
