@@ -57,10 +57,11 @@ class EdgeCATSeg(nn.Module):
 
         self.edge_proj = nn.Conv2d(
             128,
+            512,
             self.proj_dim,
             kernel_size=1
         )
-        
+
         if size_divisibility < 0:
             size_divisibility = self.backbone.size_divisibility
         self.size_divisibility = size_divisibility
