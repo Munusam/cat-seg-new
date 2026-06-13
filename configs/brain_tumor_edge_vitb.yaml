@@ -1,0 +1,36 @@
+_BASE_: config.yaml
+
+DATASETS:
+  TRAIN: ("brain_tumor_train_sem_seg",)
+  TEST: ("brain_tumor_val_sem_seg",)
+
+MODEL:
+  META_ARCHITECTURE: "EdgeCATSeg"
+
+  PROMPT_ENSEMBLE_TYPE: "single"
+
+  SEM_SEG_HEAD:
+    NUM_CLASSES: 2
+
+    TRAIN_CLASS_JSON: "datasets/brain_tumor.json"
+    TEST_CLASS_JSON: "datasets/brain_tumor.json"
+
+    CLIP_PRETRAINED: "ViT-B/16"
+
+    TEXT_GUIDANCE_DIM: 512
+    APPEARANCE_GUIDANCE_DIM: 512
+
+INPUT:
+  MIN_SIZE_TRAIN: (384,)
+  MIN_SIZE_TEST: 384
+
+SOLVER:
+  IMS_PER_BATCH: 4
+  BASE_LR: 0.0002
+  MAX_ITER: 20000
+
+DATALOADER:
+  NUM_WORKERS: 2
+
+TEST:
+  EVAL_PERIOD: 1000
