@@ -12,7 +12,7 @@ class NestedFusion(nn.Module):
         self.fuse = nn.Sequential(
 
             nn.Conv2d(
-                512 + 256 + 128,
+                2048,
                 512,
                 kernel_size=1
             ),
