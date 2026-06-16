@@ -20,3 +20,6 @@ from .data.dataset_mappers.mask_former_semantic_dataset_mapper import (
 from .cat_seg_model import CATSeg
 from .cat_seg_model_edge import EdgeCATSeg
 from .test_time_augmentation import SemanticSegmentorWithTTA
+
+
+from .cat_seg_model_nested import NestedCATSeg
