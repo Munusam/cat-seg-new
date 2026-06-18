@@ -26,3 +26,6 @@ from .cat_seg_model_nested import NestedCATSeg
 
 
 from .cat_seg_model_boundary import BoundaryAwareCATSeg
+
+
+from .cat_seg_model_hybrid import HybridCATSeg
