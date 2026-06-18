@@ -177,11 +177,26 @@ class HybridCATSeg(nn.Module):
         res5 = self.upsample2(res5)
         features = {'res5': res5, 'res4': res4, 'res3': res3,}
 
-        outputs = self.sem_seg_head(clip_features,features)
+        outputs = self.sem_seg_head(
+            clip_features,
+            features
+        )
 
-        unet_outputs = self.unetpp_branch(clip_images.tensor)
+        unet_outputs = self.unetpp_branch(
+            clip_images.tensor
+        )
 
-        outputs = (outputs + unet_outputs) / 2.0
+        unet_outputs = F.interpolate(
+            unet_outputs,
+            size=outputs.shape[-2:],
+            mode="bilinear",
+            align_corners=False
+        )
+
+        outputs = (
+            outputs +
+            unet_outputs
+        ) / 2.0
        
 
 
@@ -236,11 +251,27 @@ class HybridCATSeg(nn.Module):
         res5 = self.upsample2(rearrange(self.layers[1][1:, :, :], "(H W) B C -> B C H W", H=24))
 
         features = {'res5': res5, 'res4': res4, 'res3': res3,}
-        outputs = self.sem_seg_head(clip_features,features)
 
-        unet_outputs = self.unetpp_branch(clip_images)
+        outputs = self.sem_seg_head(
+            clip_features,
+            features
+        )
 
-        outputs = (outputs +unet_outputs) / 2.0
+        unet_outputs = self.unetpp_branch(
+            clip_images
+        )
+
+        unet_outputs = F.interpolate(
+            unet_outputs,
+            size=outputs.shape[-2:],
+            mode="bilinear",
+            align_corners=False
+        )
+
+        outputs = (
+            outputs +
+            unet_outputs
+        ) / 2.0
 
         outputs = F.interpolate(outputs, size=kernel, mode="bilinear", align_corners=False)
         outputs = outputs.sigmoid()
